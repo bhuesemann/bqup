@@ -69,7 +69,11 @@ class Table:
         str
             The export path
         """
-        table_file_name = '{}.{}.{}'.format(self.table_id, self.table_type.lower(), self._get_export_file_extension())
+        table_file_name = '{}-{}.{}.{}'.format(
+            self.table_id,
+            str(abs(hash(self.table_id)))[:6],
+            self.table_type.lower(),
+            self._get_export_file_extension())
         return path.join(dataset_dir, table_file_name)
 
     def to_file_contents(self):

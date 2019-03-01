@@ -66,7 +66,10 @@ class Dataset():
             Path to the project directory where schema will be saved
 
         """
-        dataset_dir = "{}/{}".format(project_dir, self.dataset_id)
+        dataset_dir = "{}/{}-{}".format(
+            project_dir,
+            self.dataset_id,
+            str(abs(hash(self.dataset_id)))[:6])
         os.makedirs(dataset_dir)
         for t in self.tables:
             t.export(dataset_dir)
